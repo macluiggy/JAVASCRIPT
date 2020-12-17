@@ -78,6 +78,27 @@ li {
 	border-top: 1px solid #7ee0c9;
 	border-bottom: 1px solid #3b6a5e;}
 
+.yellow {
+		background-color: #fbff00;
+		color: #fff;
+		text-shadow: 2px 2px 1px #3b6a5e;
+		border-top: 1px solid #7ee0c9;
+		border-bottom: 1px solid #3b6a5e;}
+	
+.red {
+	background-color: #eb2222;
+	color: #fff;
+	text-shadow: 2px 2px 1px #3b6a5e;
+	border-top: 1px solid #7ee0c9;
+	border-bottom: 1px solid #3b6a5e;}
+
+.blue {
+	background-color: #180cc7;
+	color: #fff;
+	text-shadow: 2px 2px 1px #3b6a5e;
+	border-top: 1px solid #7ee0c9;
+	border-bottom: 1px solid #3b6a5e;}
+
 .complete {
   background-color: #999;
 	color: #fff;
