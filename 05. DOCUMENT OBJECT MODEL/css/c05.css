@@ -112,7 +112,7 @@ li a {
 	color: #fff;
 	text-decoration: none;
 	background-image: url("../images/icon-link.png");
-	background-position: center, right;
+	background-position: right;
 	background-repeat: no-repeat;
     padding-right: 36px;}
 
