@@ -11,6 +11,7 @@ $(function () {
         eventType = 'Event: ' + e.type + '<br>';
         ids = 'Id: ' + this.id;
         $('#notes').html( listItem + itemStatus + eventType + ids);
+        $('#notes').fadeIn(700);
     });
     
 });
