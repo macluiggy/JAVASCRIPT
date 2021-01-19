@@ -17,7 +17,7 @@ $('#dos').on('click', function () {
         $p.remove();
         $('h2').after($cloneQuote);
         
-        //$('body').unwrap()/
+        //$('body').unwrap()
         var $moveItem = $('#one').detach();
         $('ul').append($moveItem);
     });
