@@ -1,7 +1,8 @@
+
 $(function () {
     var $window = $(window);
-    var $slideAd = $('#slideAd');
-    var endZone = $('#footer').offset().top - $window.height() - 500;
+    var $slideAd = jQuery('#slideAd');                                       // jQuery = $
+    var endZone = jQuery('#footer').offset().top - $window.height() - 500; // jQuery = $
 
     $window.on('scroll', function () {
         
