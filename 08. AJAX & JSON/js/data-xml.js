@@ -4,7 +4,7 @@ xhr.onload = function () {
     if (xhr.status === 200) {
 
         var response = xhr.responseXML;
-        var events = document.getElementsByTagName('event');
+        var events = response.getElementsByTagName('event');
 
         for (let i = 0; i < events.length; i++) {
             var container, image, location, city, newline;
@@ -33,5 +33,5 @@ xhr.onload = function () {
         }
     }
 };
-xhr.open('GET', 'data.data.xml', true);
-xhr.send(null);
+xhr.open('GET', 'data/data.xml', true);
+xhr.send(null);                                    // Send the request

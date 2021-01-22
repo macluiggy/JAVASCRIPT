@@ -6,6 +6,6 @@ xhr.onload = function () {
     }
 };
 
-xhr.open('GET', 'data/data.html', true);
+xhr.open('GET', 'http://www.javascriptbook.com/code/c08/data/data.xml', true);
 xhr.send(null);
 
