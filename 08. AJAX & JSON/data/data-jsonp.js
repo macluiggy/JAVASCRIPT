@@ -14,6 +14,11 @@ showEvents({
       "location": "New York, NY",
       "date": "May 30",
       "map": "img/map-ny.png"
+    },
+    {
+      "location": "Portiviejo, Ecuador",
+      "date": "enero 23",
+      "map": "img/map-ny.jpg"
     }
   ]
 });
