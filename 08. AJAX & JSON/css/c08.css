@@ -13,8 +13,13 @@ body {
 header {
   display: block;
   height: 140px;
+  border-top: 5px solid #000;
   border-bottom: 5px solid #000;
   margin-bottom: 30px;}
+
+  h1:hover {
+    filter: blur(10px);
+  }
 
 h1 {
   font-weight: normal;
