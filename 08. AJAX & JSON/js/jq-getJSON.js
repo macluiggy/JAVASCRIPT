@@ -3,6 +3,7 @@
 
 
 $('#exchangerates').append('<div id="rates"></div><div id="reload"></div>');
+var count = 0;
 
 function loadRates() {
   $.getJSON('data/rates.json')
@@ -16,14 +17,16 @@ function loadRates() {
     });
     msg += '<br>Last update: ' + hrs + ':' + mins + '<br>'; // Show update time
     $('#rates').html(msg);                               // Add rates to page
-        }).fail( function() {                                  // THERE IS AN ERROR
-    $('#rates').text('Sorry, we cannot load rates.');   // Show error message 
-        }).always( function() {                                // ALWAYS RUNS
+  }).fail( function() {                                  // THERE IS AN ERROR
+    $('#rates').html('<p>Sorry, we cannot load rates.</p> <br> <p> Times refrehed: '+ count + '</p>');   // Show error message 
+  }).always( function() {                                // ALWAYS RUNS
      var reload = '<a id="refresh" href="#">';           // Add refresh link
      reload += '<img src="img/refresh.png" alt="refresh" /></a>';
      $('#reload').html(reload);                          // Add refresh link
-     $('#refresh').on('click', function(e) {             // Add click handler
-       e.preventDefault();                               // Stop link
+     $('#refresh').on('click', function(e) {     // Add click handler
+       e.preventDefault();
+       count ++;
+       
        loadRates();                                      // Call loadRates()
      });
   }); 
