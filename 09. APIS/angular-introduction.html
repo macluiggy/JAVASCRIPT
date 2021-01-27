@@ -10,6 +10,8 @@
     <div class="third">
       <p class="welcome">Tell your friends to join us for an awesome day of tinkering with the Maker Bus...</p>
       <form>
+        Title:<br>
+        <input ng-model="title" type="text">
         To:<br>
         <input ng-model="name" type="text" /><br>
         Message:<br>
@@ -19,8 +21,10 @@
     </div>
     <div class="two-thirds">
       <div class="postcard">
-        <div>{{ name }}</div>
-        <p>{{ message }}</p>
+        
+        <div>{{ title }}</div>
+        <p>{{ name }} <br> {{ message }}</p>
+        <p></p>
       </div>
     </div>
   </body>

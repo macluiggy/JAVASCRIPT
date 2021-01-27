@@ -15,7 +15,9 @@
         <tr><td>Item:</td><td>{{ description }}</td></tr>
         <tr><td>Cost:</td><td>${{ cost }}</td></tr>
         <tr><td>Qty:</td><td><input type="number" ng-model="qty"></td></tr>
+        <tr><td>IVA:</td><td>{{ ivaPor }}</td></tr>
         <tr><td>Subtotal:</td><td>{{qty * cost | currency}}</td></tr>
+        <tr><td>Total:</td><td>{{cost * qty * (1 + iva)}}</td></tr>
       </table>
     </div>
   </body>
