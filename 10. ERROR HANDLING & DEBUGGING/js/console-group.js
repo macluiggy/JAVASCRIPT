@@ -2,7 +2,7 @@ console.info('And we\'re off...');
 var $form, width, height, area;
 $form = $('#calculator');
 
-$('form input[type="text"]').on('click', function () {
+$('form input[type="text"]').on('b', function () {
     console.warn('You entered', this.value);
 });
 
@@ -11,13 +11,13 @@ $('#calculator').on('submit', function (e) {
     console.log('Clicked submit...');
 
     width = $('#width').val();
-    console.log('Width: ' + width);
-    
     height = $('#height').val();
-    console.log('Height: ' + height);
-
     area = width * height;
-    console.error(area);
+    
+    console.group("Area calculation:")
+    console.log('Width', width);
+    console.log('Height ', height);
+    console.log('Area: ' ,area);
 
     $form.append('<p class="result">' + area + '</p>');
 });
