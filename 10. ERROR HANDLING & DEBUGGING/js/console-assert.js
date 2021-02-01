@@ -1,9 +1,8 @@
-console.info('And we\'re off...');
 var $form, width, height, area;
-$form = $('#calculator');
+$form =$('#calculator');
 
-$('form input[type="text"]').on('b', function () {
-    console.warn('You entered', this.value);
+$('form input[type="text"]').on('blur', function () {
+    console.assert(this.value > 10, 'User entered less than 10');
 });
 
 $('#calculator').on('submit', function (e) {
@@ -13,13 +12,11 @@ $('#calculator').on('submit', function (e) {
     width = $('#width').val();
     height = $('#height').val();
     area = width * height;
-    
-    console.group("Area calculation:")
-    console.log('Width', width);
-    console.log('Height ', height);
-    console.log('Area: ' ,area);
 
-    $form.append('<p class="result">' + area + '</p>');
+    console.assert($.isNumeric(area), 'User entered non-numeric value');
+    console.assert(area > 10, 'User entered an area less than 10');
+
+    $form.append('<p>' + area + '</p>');
 });
 
 $('#logo').on('click', function () {
