@@ -21,7 +21,7 @@ var modal = (function () {
             });
         },
         open: function (settings) {
-            $content.empty().append(settings.content);
+            $content.empty().append(settings.content).hide().fadeIn('slow');
 
             $modal.css({
                 width: settings.width || 'auto',
@@ -34,7 +34,7 @@ var modal = (function () {
         close: function () {
             $content.empty();
             $modal.detach();
-            $(window).off('resize', modal.center);
+            $(window).fadeOut('slow').off('resize', modal.center);
         }
     };
 }());
