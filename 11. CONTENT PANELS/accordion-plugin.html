@@ -9,7 +9,7 @@
   <body>
 
     <header><h1>Monsieur Pigeon</h1></header>
-
+    <input type="text" placeholder="enter a number in ms" id="val">
     <section class="page">
       <ul class="menu">
         <li>
@@ -37,7 +37,12 @@
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="js/jquery.accordion-plugin.js"></script>
     <script>
-      $('.menu').accordion(500);
+      var val = $('#val').val();
+
+      $('#val').on('input', function (e) {
+        e.preventDefault;
+      })
+      $('.menu').accordion(val);
     </script>
   </body>
 </html>
