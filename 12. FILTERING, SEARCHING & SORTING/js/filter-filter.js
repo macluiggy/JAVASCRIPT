@@ -42,14 +42,22 @@ $(function () {
     results = people.filter(priceRange);
 
     var $tableBody = $('<tbody></tbody>');
-    for (let i = 0; i < results.length; i++) {
+    /* for (let i = 0; i < results.length; i++) {
         var person = results[i]; 
         var $row = $('<tr></tr>'); 
         $row.append($('<td></td>').text(person.name));
         $row.append($('<td></td>').text(person.rate));
         $row.append($('<td></td>').text(person.age));
         $tableBody.append($row);
-    }
+    } */
 
-    $('thead').after($tableBody);
+    results.forEach(function (result) {
+        var $row = $('<tr></tr>'); 
+        $row.append($('<td></td>').text(result.name));
+        $row.append($('<td></td>').text(result.rate));
+        $row.append($('<td></td>').text(result.age));
+        $tableBody.append($row);
+    });
+
+    $('thead').after($tableBody); 
 });
