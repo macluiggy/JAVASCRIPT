@@ -91,13 +91,50 @@
         // y la funcion isEmpty devolvera false
         return !el.value || el.value === el.placeholder;
     }
+    // VERIFICA SI EL VALOR ENCAJA CON EL TYPO DE ATRIBUTO
+    // Se basa en el objeto validateTypes (mostrado al final de la IIFE)
+    function validateTypes(el) {
+        if (!el.value) return true; // si el elemento no contiene un valor, retorna true
 
-
+        var type = $(el).data('type') || el.getAttribute('type'); // primero verifica si la variable type
+        // se puede alojar con el metodo .data() de Jquery, si no se guarda el valor del tipo de atributo
+        // con el metodo getAttribute() debido a que todos los navegadores pueden devolver el valor del tipo de
+        // atributo...
+        if (validateType[type] === 'function') { // encaja el elemento type del objeto validateType
+            // con el tipo de valor, en este caso una funcion?
+            validateTypes[type](el); // si es asi el elemento es pasado al objeto como
+            // parametro, este retorna true o false;
+        } else {
+            return true; // si no encaja, el objeto no es capas de validar e control de forma
+            // asi que no se debe establecer un mensaje de error
+        }
+    }
     // -------------------------------------------------------------------------
-    // C) FUNCIONES PARA VALIDACIONES PERSONALIZADA
+    // C) FUNCIONES PARA VALIDACIONES PERSONALIZADAS
     // -------------------------------------------------------------------------
+    // SI EL USUSARIO ES MENOR DE 13, VERIFICA QUE LOS PAPAS HAYAN MARCADO LA CASILLA DE CONSENTIMIENTO
+    // Dependency: birthday.js (de otra forma verifica que no funciona)
 
 
+    // Verifica que la biografia sea menor o igual a 140 caracteres
+    function validateBio() {
+        var bio = document.getElementById('bio'); // guarda la referencia al area de texto de la biografia
+        var valid = bio.value.length <= 140; // es bio menor o igual a 140 caracteres?
+        if (!valid) { // si no lo es, establece el mensaje de error
+            setErrorMessage(bio, 'Your bio should not exceed 140 characters');
+        }
+        return valid; // devuelve el valor de la variable valid
+    }
+
+    // Verifica que ambas contraseñas encajen y tengan 8 caracteres o mas
+    function validatePassword() {
+        var password = document.getElementById('password'); // guarda la referencia al elemento de contraseña
+        var valid = password.value.length >= 8; // es la contraseña mayor o igual a 8?
+        if (!valid) { // si no lo es, establece el mensaje de error
+            setErrorMessage(password, 'Password must be at least 8 caracters');
+        }
+        return valid; // devuelve el valor de valid (true/false)
+    }
     // -------------------------------------------------------------------------
     // D) FUNCIONES PARA SET / GET / SHOW / REMOVE MENSAJES DE ERROR
     // -------------------------------------------------------------------------
@@ -114,10 +151,50 @@
     }
 
     function showErrorMessage(params) {
-        
+        var $el = $(el);  // Encuentra el elemento con el error
+        var $errorContainer = $el.siblings('.error'); // busca a los hermanos del elemento que
+        // contengan como classe 'error'
+
+        if (!$errorContainer.length) { // si error container no contiene errores aun, entonces no tiene
+            //longitud, asi que la condicion es true (ya que si no tiene longitud se considera falsy)
+            $errorContainer = $('<span class="error"></span>').insertAfter($el); // a la variable
+            // error container añadele un tag de span e inserta el mismo despues del elemento correspondiente
+        }
+        $errorContainer.text(getErrorMessage(el)); // para añadir el texto del error, se llama a la funcion
+        // getErrorMessage() con el elemento como argumento, luego se añade el texto con la funcion text()
+        // dentro de la variable $errorContainer
     }
 
     // -------------------------------------------------------------------------
-    // E) OBJETOS PARA VERIFICAR TYPOS
+    // E) OBJETO PARA VERIFICAR TYPOS
     // -------------------------------------------------------------------------
+
+    // Verifica si los datos son validos, si no se establece un mensaje de error
+    // Retorna true si es valido, false si es invalido
+    var validateType = {
+        email: function (el) { // crea un metodo de email
+            var valid = /[^@]+@[^@]+/.test(el.value); //guarda el resulatado de el test en valid
+            // este verifica que el email contenga la expresion regular correspondiente
+            if (!valid) { // si no la tiene
+                setErrorMessage(el, 'Please enter a valid email') // establece el error
+            }
+            return valid; // si la expresion regualr encaja, devuelve valid (true)
+        },
+        number: function (el) { // crea un metodo de number
+            var valid = /^\d+$/.test(el.value); //guarda el resulatado de el test en valid
+            // este verifica que el number contenga la expresion regular correspondiente
+            if (!valid) { // si no la tiene
+                setErrorMessage(el, 'Please enter a valid number') // establece el error
+            }
+            return valid; // si la expresion regualr encaja, devuelve valid (true)
+        },
+        date: function (el) { // crea un metodo de date
+            var valid = /^(\d{2}\/\d{2}\/\d{4})|(\d{4}-\d{2}-\d{2})$/.test(el.value); //guarda el resulatado de el test en valid
+            // este verifica que el date contenga la expresion regular correspondiente
+            if (!valid) { // si no la tiene
+                setErrorMessage(el, 'Please enter a valid date') // establece el error
+            }
+            return valid; // si la expresion regualr encaja, devuelve valid (true)
+        }
+    }
 }());
