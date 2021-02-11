@@ -114,7 +114,22 @@
     // -------------------------------------------------------------------------
     // SI EL USUSARIO ES MENOR DE 13, VERIFICA QUE LOS PAPAS HAYAN MARCADO LA CASILLA DE CONSENTIMIENTO
     // Dependency: birthday.js (de otra forma verifica que no funciona)
-
+    function validatePatentsConsent() {
+        var parentsConsent = document.getElementById('parents-consent'); // referencia a el consentimiento
+        // de los padres y
+        var consentContainer = document.getElementById('consent-container'); // a su contenedor
+        // de elementos
+        var valid = true; // variacle valid es estableciada a true
+        if (consentContainer.className.indexOf('hide') === -1) { // si la classe correspondiente
+            // no es encontrada la condicion es verdadera, eso quiere decir que el checkbox esta mostrado
+            valid = parentsConsent.checked; // actualiza valid: esta marcado la casilla con el consentimiento de
+            // los padres?
+            if (!valid) { // si no, muestra el mensaje de error
+                setErrorMessage(parentsConsent, 'Your need your parents\' consent');
+            }
+        }
+        return valid; //devuelve el valor de valid (true/false)
+    }
 
     // Verifica que la biografia sea menor o igual a 140 caracteres
     function validateBio() {

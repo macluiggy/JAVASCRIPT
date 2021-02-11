@@ -1,4 +1,18 @@
 (function () {
+  var $birth = $('#birthday');
+  var $parentsConsent = $('#parents-consent');
+  var $consentContainer = $('#consent-container');
+
+  $birth.prop('type', 'text').data('type', 'date').datepicker({
+    dateFormat: 'yy-mm-dd';
+  });
+  $birth.on('blur change', checkDate);
+  function checkDate() {
+    
+  }
+}())
+
+/*(function () {
   var $birth = $('#birthday');                         // D-O-B input
   var $parentsConsent = $('#parents-consent');         // Consent checkbox
   var $consentContainer = $('#consent-container');     // Checkbox container
@@ -30,4 +44,4 @@
       $parentsConsent.prop('checked', false);           // Set checked to false
     }
   }
-}());
+}()); */
