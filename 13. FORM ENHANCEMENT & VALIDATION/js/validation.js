@@ -17,10 +17,9 @@
         var isValid;
         var isFormValid;
 
-
         for (let i = 0, l = elements.length - 1; i < l; i++) {
             
-            isValid = validateRequired(elements[i]) && validateType(elements[i]); // Verifica entre si
+            isValid = validateRequired(elements[i]) && validateTypes(elements[i]); // Verifica entre si
             // el elemento actual es requrido y si tambien el typo de elemento es valido, si ambas funciones
             // debuelven true isValid tambien es true
             if (!isValid) {//si el elemento no es requerido ni su typo es valido
@@ -38,7 +37,22 @@
             removeErrorMessage(document.getElementById('bio')); // si es valido, se borra el mensaje de error
         }
 
-        // validateParents y validatePassword van aqui
+        // contraseña (podrias almacenar en cache el input de la contraseña en una varable aqui )
+        if (!validatePassword()) { // si la contraseña no es valida
+            showErrorMessage(document.getElementById('password')); // muestra el mensaje de error
+            valid.password = false; // establece el elemento password del objeto valid a false
+        } else { // si es valida
+            removeErrorMessage(document.getElementById('password')); // elimina el mensaje de error
+        }
+
+        //consentimiento de los padres 
+        //(podrias almacenar en cache el consentimiento de los padres en una varable aqui )
+        if (!validateParentsConsent()) { // si el no se valido el consentimiento de los padres
+            showErrorMessage(document.getElementById('parents-consent')); // muestra el mensaje de error
+            valid.parentsConsent = false; // establece el elemento correspondiente del objeto valid a false
+        } else { // de otro modo
+            removeErrorMessage(document.getElementById('parents-consent')); // elimina el mensaje de error
+        }
 
         for (var field in valid) { // loopea en cada elemento del objeto valid
             if (!valid[field]) { //si cualquiera de los elementos tiene un valor de falso
@@ -114,7 +128,7 @@
     // -------------------------------------------------------------------------
     // SI EL USUSARIO ES MENOR DE 13, VERIFICA QUE LOS PAPAS HAYAN MARCADO LA CASILLA DE CONSENTIMIENTO
     // Dependency: birthday.js (de otra forma verifica que no funciona)
-    function validatePatentsConsent() {
+    function validateParentsConsent() {
         var parentsConsent = document.getElementById('parents-consent'); // referencia a el consentimiento
         // de los padres y
         var consentContainer = document.getElementById('consent-container'); // a su contenedor
@@ -165,7 +179,7 @@
         return $(el).data('errorMessage') || el.title;
     }
 
-    function showErrorMessage(params) {
+    function showErrorMessage(el) {
         var $el = $(el);  // Encuentra el elemento con el error
         var $errorContainer = $el.siblings('.error'); // busca a los hermanos del elemento que
         // contengan como classe 'error'
@@ -178,6 +192,11 @@
         $errorContainer.text(getErrorMessage(el)); // para añadir el texto del error, se llama a la funcion
         // getErrorMessage() con el elemento como argumento, luego se añade el texto con la funcion text()
         // dentro de la variable $errorContainer
+    }
+
+    function removeErrorMessage(el) {
+        var errorContainer = $(el).siblings('.error.message');
+        errorContainer.remove();
     }
 
     // -------------------------------------------------------------------------
