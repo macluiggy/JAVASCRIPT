@@ -1,6 +1,6 @@
-var xhr = XMLHttpRequest();
+var xhr = new XMLHttpRequest();
 
-xhr.onload = function () {
+xhr.onload = function() {
     if (xhr.status === 200) {
 
         var response = xhr.responseXML;
@@ -13,25 +13,25 @@ xhr.onload = function () {
 
             image = document.createElement('img');
             image.setAttribute('src', getNodeValue(events[i], 'map'));
-            image.appendChild(document.createTextNode(getNodeValue(events[i], 'map')));
+            image.setAttribute('alt', getNodeValue(events[i], 'location'));
             container.appendChild(image);
-            
+
             location = document.createElement('p');
             city = document.createElement('b');
-            newline = document.createElement('br');
-            city.appendChild(document.createTextNode(getNodeValue(events[i], 'location')));
-            location.appendChild(newline);
-            location.insertBefore(city, newline);
-            location.appendChild(document.createTextNode(getNodeValue(events[i], 'date')));
+
+            city.innerHTML = `${getNodeValue(events[i], 'location')} 
+            <br> ${getNodeValue(events[i], 'date')} `
+            location.appendChild(city);
             container.appendChild(location);
 
             document.getElementById('content').appendChild(container);
         }
 
         function getNodeValue(obj, tag) {
+            // body... 
             return obj.getElementsByTagName(tag)[0].firstChild.nodeValue;
         }
     }
 };
 xhr.open('GET', 'data/data.xml', true);
-xhr.send(null);                                    // Send the request
+xhr.send(null); // Send the request

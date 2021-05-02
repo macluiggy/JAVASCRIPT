@@ -13,11 +13,10 @@ if (Modernizr.geolocation) {                                // Is geo supported
 }
 
 function success(position) {                                // Got location
-  msg = '<h3>Longitude:<br>';                               // Create message
-  msg += position.coords.longitude + '</h3>';               // Add longitude
-  msg += '<h3>Latitude:<br>';                               // Create message
-  msg += position.coords.latitude + '</h3>';                // Add latitude
-  elMap.innerHTML = msg;                                    // Show location
+ 
+  msg =`<h3>Longitudessssssss:<br> ${position.coords.longitude} </h3>
+  <h3>Latitude:<br> ${position.coords.latitude} </h3> `;
+  elMap.innerHTML = msg;                                 // Show location
 }
 
 function fail(msg) {                                        // Not got location
