@@ -19,7 +19,7 @@ xhr.onload = function() {
             location = document.createElement('p');
             city = document.createElement('b');
 
-            city.innerHTML = `${getNodeValue(events[i], 'location')} 
+            city.innerHTML = `<b>${getNodeValue(events[i], 'location')} </b>
             <br> ${getNodeValue(events[i], 'date')} `
             location.appendChild(city);
             container.appendChild(location);

@@ -1,28 +1,24 @@
 var xhr = new XMLHttpRequest();
 
-xhr.onload = function () {
+xhr.onload = () => {
     if (xhr.status === 200) {
-        responseObject = JSON.parse(xhr.responseText);
-
-        var newContent = '';
-        for (let o = 0; o < responseObject.events.length; o++) {
-            newContent += '<div class="event">';
-            newContent += '<img src="' + responseObject.events[i].map + '"';
-            newContent += 'alt="' + responseObject.events[i].location +'" />';
-            newContent += '<p><b>' + responseObject.events[i].location + '</b><br>';
-            newContent += responseObject.events[i].date + '</p>';
-            newContent += '</div>';
-        }
+        var response = xhr.responseText;
+        let responseObject = JSON.parse(response);
+        let newContent = '';
+        let eventsArr = responseObject.events;
         
-        var container = document.createElement('div');
-        container.className('container');
-        var location = '<img src="' + responseObject.events[1].map + '">';
-        container.appendChild(location);
+        eventsArr.forEach( (el, i) => {
+            // statements
+            newContent+= `<div class="event">
+            <img src="${eventsArr[i].map}" alt="${el.location}">
+            <p><b>${el.location}</b><br>
+            ${el.date}</p></div> `
+        });
 
         document.getElementById('content').innerHTML = newContent;
-        document.getElementById('content').appendChild(container);
     }
-};
+
+}
 
 xhr.open('GET', 'data/data.json', true);
 xhr.send(null);

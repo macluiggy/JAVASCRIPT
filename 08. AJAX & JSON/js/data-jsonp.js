@@ -1,16 +1,71 @@
-function showEvents(data) {
+/*let elScript = document.createElement('script');
+elScript.innerHTML = `
+showEvents({
+  "events": [
+    {
+      "location": "San Francisco, CA",
+      "date": "May 1",
+      "map": "img/map-ca.png"
+    },
+    {
+      "location": "Austin, TX",
+      "date": "May 15",
+      "map": "img/map-tx.png"
+    },
+    {
+      "location": "New York, NY",
+      "date": "May 30",
+      "map": "img/map-ny.png"
+    },
+    {
+      "location": "Portiviejo, Ecuador",
+      "date": "enero 23",
+      "map": "img/map-ny.jpg"
+    }
+  ]
+});
+`
+document.getElementsByTagName('body')[0].appendChild(elScript);*/
+
+let elScript = document.createElement('script');
+elScript.setAttribute('src', './data/data-jsonp.js');
+document.getElementsByTagName('body')[0].appendChild(elScript);
+
+function showEvents(jsonObject) {
     var newContent = '';
 
-    for (let i = 0; i < data.events.length; i++) {
-        newContent += '<div class="event">';
-        newContent += '<img src="' + data.events[i].map + '" ';
-        newContent += 'alt="' + data.events[i].location + '" />';
-        newContent += '<p><b>' + data.events[i].location + '</b><br>';
-        newContent += data.events[i].date + '</p>';
-        newContent += '</div>';
-        
-    }
-
+    jsonObject.events.forEach(el => {
+        // statements
+        newContent += `<div class="event">
+            <img src="${el.map}" alt="${el.location}">
+            <p><b>${el.location}</b><br>
+            ${el.date}</p></div> `
+    });
 
     document.getElementById('content').innerHTML = newContent;
 }
+
+/*showEvents({
+  "events": [
+    {
+      "location": "San Francisco, CA",
+      "date": "May 1",
+      "map": "img/map-ca.png"
+    },
+    {
+      "location": "Austin, TX",
+      "date": "May 15",
+      "map": "img/map-tx.png"
+    },
+    {
+      "location": "New York, NY",
+      "date": "May 30",
+      "map": "img/map-ny.png"
+    },
+    {
+      "location": "Portiviejo, Ecuador",
+      "date": "enero 23",
+      "map": "img/map-ny.jpg"
+    }
+  ]
+})*/
